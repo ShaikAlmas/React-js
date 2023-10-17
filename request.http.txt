@@ -1,0 +1,24 @@
+GET http://localhost:2023/list
+ POST HTTP://localhost:2024/new
+ content-type:application/json 
+
+{
+  "seed_id":105,
+  "seed_name":"Mango",
+  "recommended_period":"2-3 years",
+  "recommended_season":"summer",
+  "price":250,
+  "quantity":"500-grams"
+} 
+
+PUT http://localhost:2023/info/change/102
+content-type:application/json
+
+{
+    "seed_name":"Rose"
+}
+
+DELETE http://localhost:2024/info/delkey/3
+
+ 
+DELETE http://localhost:2024/info/close/40000
