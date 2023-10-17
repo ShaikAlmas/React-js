@@ -19,7 +19,7 @@ myRoute.use(bodyparser.json())
 myRoute.put('/change/:id',async(req,res)=>{
     const{seed_name}=req.body
     const sql="update seed_repository set seed_name=? where seed_id=?"
-    dataBase.query(sql,[seed_name,req.params.seed_id],(err,ack)=>{
+    dataBase.query(sql,[seed_name,req.params.id],(err,ack)=>{
         if(err){
             res.status(500).json({error:err.message})
             return
