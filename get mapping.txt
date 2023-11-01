@@ -1,0 +1,31 @@
+const refExp = require("express")
+const refMysql=require("mysql2")
+const app=refExp()
+const dbase=refMysql.createConnection({
+    "host":"localhost",
+    "user":"root",
+    "password":"Shaikalmas@18",
+    "port":3306,
+    "database":"project2"
+})
+dbase.connect(()=>{
+    console.log("Data Base Connected")
+})
+app.listen(2004,()=>{
+    console.log("App is running")
+})
+app.get('/require',async(req,res)=>{
+    const sql="select*from symposium"
+    dbase.query(sql,(err,records)=>{
+        if(err){
+            res.status(404).json({"error":err.message})
+            return
+        }
+        if(records.length==0){
+            res.json(201).json({"message":norecordsfound})
+            return
+        }
+        res.status(200).json({records})
+    })
+});
+ 
