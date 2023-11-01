@@ -6,7 +6,7 @@ const dbase=refMysql.createConnection({
     "user":"root",
     "password":"Shaikalmas@18",
     "port":3306,
-    "database":"project"
+    "database":"project2"
 })
 dbase.connect(()=>{
     console.log("Data Base Connected")
@@ -15,7 +15,7 @@ app.listen(8090,()=>{
     console.log("App is running")
 })
 app.get('/obtain',async(req,res)=>{
-    const sql="select*from seed_repository"
+    const sql="select*from symposium"
     dbase.query(sql,(err,records)=>{
         if(err){
             res.status(404).json({"error":err.message})
@@ -28,3 +28,4 @@ app.get('/obtain',async(req,res)=>{
         res.status(200).json({records})
     })
 });
+
