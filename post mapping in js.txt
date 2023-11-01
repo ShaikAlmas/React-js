@@ -1,11 +1,11 @@
 const express= require('express')
 const bodyparser=require('body-parser')
 const mysql=require('mysql2')
-const upndel = require('./modify')
+const upndel = require('./put')
 
 const dataBase=mysql.createConnection({
     host:"localhost",
-    database:"project",
+    database:"project2",
     user:"root",
     password:"Shaikalmas@18"
 })
@@ -17,14 +17,14 @@ application.use('/info',upndel)
 application.use(bodyparser.urlencoded({extended:true}))
 application.use(bodyparser.json())
 
-application.listen(2024,(err)=>{
+application.listen(2004,(err)=>{
     console.log("Webservice running successfully") 
 })
 
 //crud operations
 //read operation: Get mapping, display all details in the table as json
 application.get('/list',async(req,res)=>{
-    const sql="select*from seed_repository"
+    const sql="select*from symposium"
     dataBase.query(sql,(err,records)=>{
         if(err){
             res.status(500).json({error:err.message})
@@ -35,18 +35,19 @@ application.get('/list',async(req,res)=>{
             return
         }
         res.status(200).json(records)
-    })
+    })   
 })      
 application.post('/new',async(req,res)=>{
     //destructure follows order of parameters
-    const{seed_id,seed_name,recommended_period,recommended_season,price,quantity}=req.body 
-    const sql="insert into seed_repository values(?,?,?,?,?,?)"
-    dataBase.query(sql,[seed_id,seed_name,recommended_period,recommended_season,price,quantity],(err,ack)=>{
-        if(err){
+    const{Symp_id,Stu_name,College_name,Year,Course,Email_id,Contact,Event_type}=req.body 
+    const sql="insert into symposium values(?,?,?,?,?,?,?,?)"
+    dataBase.query(sql,[Symp_id,Stu_name,College_name,Year,Course,Email_id,Contact,Event_type],(err,ack)=>{
+        if(err){ 
             res.status(500).json({error:err.message})
             return
-        }
+        } 
         res.status(200).json({message:"data has added"})
 
     }) 
 }) 
+
